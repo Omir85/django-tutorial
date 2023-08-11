@@ -1,1 +1,3 @@
 virtual
+.ssh
+db.sqlite3
