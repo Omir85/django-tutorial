@@ -2,9 +2,19 @@
 
 {% block content %}
     <h1>{{ls.name}}</h1>
-    <ul>
-        {% for item in ls.item_set.all %}
-        <li>{{item.text}} - {% if not item.complete %}IN{% endif %}COMPLETE</li>
-        {% endfor %}
-    </ul>
+    <form action="#" method="post">
+        {% csrf_token %}
+        <ul>
+            {% for item in ls.item_set.all %}
+            {% if item.complete == True %}
+            <li><input type="checkbox" name="c{{item.id}}" value="clicked" checked />{{item.text}}</li>
+            {% else %}
+            <li><input type="checkbox" name="c{{item.id}}" value="clicked" />{{item.text}}</li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        <button type="submit" name="save" value="save">Save</button>
+        <input type="text" name="new" />
+        <button type="submit" name="newItem" value="newItem">Add Item</button>
+    </form>
 {% endblock %}
