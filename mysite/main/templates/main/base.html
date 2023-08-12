@@ -52,6 +52,9 @@
                     <hr class="mt-0 mb-4" />
                     {% block content %}
                     {% endblock %}
+                    {% if not user.is_authenticated %}
+                        <p><a href="/login">Please log in</a></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
