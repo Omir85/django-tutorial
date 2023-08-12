@@ -43,7 +43,12 @@
         <div class="sidenav">
             <a href="/">Home</a>
             <a href="/create">Create</a>
-            <a href="/2">View</a>
+            <a href="/view">View</a>
+            {% if not user.is_authenticated %}
+                <a href="/login">Log in</a>
+            {% else %}
+                <a href="/logout">Log out</a>
+            {% endif %}
         </div>
         <div id="content" name="content" class="main">
             <div class="row justify-content-center">
@@ -52,9 +57,7 @@
                     <hr class="mt-0 mb-4" />
                     {% block content %}
                     {% endblock %}
-                    {% if not user.is_authenticated %}
-                        <p><a href="/login">Please log in</a></p>
-                    {% endif %}
+                    
                 </div>
             </div>
         </div>
