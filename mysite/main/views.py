@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .models import ToDoList
 from .forms import CreateNewList
+from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+@login_required(login_url='/login/')
 def index(response, id):
     ls = ToDoList.objects.get(id = id)
     if ls in response.user.todolist.all():
@@ -28,6 +29,7 @@ def index(response, id):
 def home(response):
     return render(response, "main/home.html", {"user" : response.user})
 
+@login_required(login_url='/login/')
 def create(response):
     if response.method == "POST":
         form = CreateNewList(response.POST)
@@ -41,5 +43,6 @@ def create(response):
         form = CreateNewList()
     return render(response, "main/create.html", {"form" : form})
 
+@login_required(login_url='/login/')
 def view(response):
     return render(response, "main/view.html", {})
