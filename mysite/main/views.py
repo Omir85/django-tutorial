@@ -26,7 +26,7 @@ def index(response, id):
     return render(response, "main/view.html", {})
 
 def home(response):
-    return render(response, "main/home.html", {})
+    return render(response, "main/home.html", {"user" : response.user})
 
 def create(response):
     if response.method == "POST":
